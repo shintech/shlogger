@@ -11,18 +11,16 @@ module.exports = function () {
 
   if (NODE_ENV === 'test') {
     return logger.add(
-      new winston.transports.File({ filename: path.join('log', 'test.log'), level: 'warn' })
+      new winston.transports.File({ filename: path.join('log', 'test.log'), level: 'info' })
     )
   }
 
   if (NODE_ENV !== undefined) {
-    logger.add(
-      new winston.transports.File({ filename: path.join('log', 'error.log'), level: 'error' }),
-      new winston.transports.File({ filename: path.join('log', 'combined.log') })
-    )
+    logger.add(new winston.transports.File({ filename: path.join('log', 'error.log'), level: 'error' }))
+    logger.add(new winston.transports.File({ filename: path.join('log', 'combined.log'), level: 'info' }))
   }
 
-  if (NODE_ENV !== 'production') {
+  if (NODE_ENV === 'development') {
     logger.add(new winston.transports.Console({
       format: winston.format.combine(
         winston.format.colorize(),
