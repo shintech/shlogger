@@ -20,7 +20,7 @@ module.exports = function ({ directory }) {
     logger.add(new winston.transports.File({ filename: path.join(directory, 'combined.log'), level: 'info' }))
   }
 
-  if (NODE_ENV === 'development') {
+  if (directory === undefined || NODE_ENV === 'development') {
     logger.add(new winston.transports.Console({
       format: winston.format.combine(
         winston.format.colorize(),
