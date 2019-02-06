@@ -3,7 +3,7 @@ const path = require('path')
 
 const NODE_ENV = process.env['NODE_ENV']
 
-module.exports = function ({ directory = path.join(__dirname, 'log') }) {
+module.exports = function ({ directory }) {
   let logger = winston.createLogger({
     level: 'info',
     format: winston.format.json()
